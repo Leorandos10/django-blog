@@ -25,4 +25,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('meu_app.urls')),
     path('', home, name='home'),  # Rota para a URL raiz "/"
-]
