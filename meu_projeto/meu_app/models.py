@@ -5,7 +5,7 @@ class Filme(models.Model):
     ano = models.CharField(max_length=4, blank=True, null=True)
     genero = models.CharField(max_length=100, blank=True, null=True)
     diretor = models.CharField(max_length=255, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)  # Data de criação
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.titulo

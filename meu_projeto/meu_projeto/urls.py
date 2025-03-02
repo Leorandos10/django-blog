@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import JsonResponse
+from django.shortcuts import render  
+
 
 def home(request):
-    return JsonResponse({"mensagem": "Pagina inicial funcionando. Utilize por exemplo: http://127.0.0.1:8000/api/filme/?titulo=NOMEDOFILME para buscar filmes."})
+    return render(request, 'meu_app/index.html')  
 
 urlpatterns = [
-    path("api/", include("meu_app.urls")),  # Certifique-se de que "meu_app" está correto
-    path('', home, name='home'),  # Página inicial
+    path("api/", include("meu_app.urls")),
+    path('', home, name='home'), 
 ]
