@@ -5,7 +5,8 @@ from django.conf import settings
 def buscar_filme(request):
     titulo = request.GET.get("titulo", "").strip()
     if not titulo:
-        return JsonResponse({"erro": "Informe um título de filme."}, status=400)
+        return JsonResponse({"erro": "Informe um título de filme, ex: John Wick, Superbad, Interstellar, Shrek"}, status=400)
+
 
     api_key = settings.OMDB_API_KEY
     if not api_key:

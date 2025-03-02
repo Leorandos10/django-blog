@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: meu_projeto_django
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=meu_projeto.settings
+
+  db:
+    image: postgres:latest
+    container_name: meu_projeto_db
+    environment:
+      POSTGRES_DB: meu_banco
+      POSTGRES_USER: meu_usuario
+      POSTGRES_PASSWORD: minha_senha
+    ports:
+      - "5432:5432"
