@@ -1,6 +1,5 @@
-from django.urls import path
-from .views import buscar_filme
+from django.urls import path, include
 
 urlpatterns = [
-    path('filme/', buscar_filme, name='buscar_filme'),
+    path("api/", include("meu_app.urls")),
 ]

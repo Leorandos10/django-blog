@@ -14,16 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.http import HttpResponse
-from django.contrib import admin
-from django.urls import path, include
-
-def home(request):
-    return HttpResponse("Página inicial funcionando! \nPesquise por: http://127.0.0.1:8000/api/filme/?titulo=Dune")
+from django.urls import path
+from meu_app.views import criar_filme, listar_filmes, atualizar_filme, deletar_filme
 
 
 urlpatterns = [
-    path('', home, name='home'),  # Define a rota da página inicial "/"
-    path('admin/', admin.site.urls),
-    path('api/', include('meu_app.urls')),
+    path("filme/", criar_filme, name="criar_filme"),
+    path("filmes/", listar_filmes, name="listar_filmes"),
+    path("filme/<str:imdb_id>/", atualizar_filme, name="atualizar_filme"),
+    path("filme/<str:imdb_id>/delete/", deletar_filme, name="deletar_filme"),
 ]
+
+def home(request):
+    return HttpResponse(
+        "Página inicial funcionando! \nPesquise por: http://127.0.0.1:8000/api/filme/?titulo=Dune"
+    )
