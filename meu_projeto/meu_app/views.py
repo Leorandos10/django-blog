@@ -54,6 +54,7 @@ def listar_filmes(request):
             try:
                 # Fazendo a solicitação para a API do OMDb
                 response = requests.get(url)
+                print(f"==>> type(response): {type(response)}")
                 data = response.json()
 
                 if data.get("Response") == "True":
