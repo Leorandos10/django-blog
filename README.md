@@ -11,64 +11,44 @@ Este é um projeto Django simples que implementa um sistema CRUD com autenticaç
 - Git
 - MySQL ou PostgreSQL
 
-## Configuração
+1- criar um filme POST
+	Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/criar/" -Method POST -ContentType "application/json" -Body '{"titulo": "John Wick", "ano": 2014, "genero": "Action"}'
+resposta esperada: 
+mensagem                  id
+--------                  --
+Filme criado com sucesso!  id do filme
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
-   ```
+2- Listar todos os filmes (GET)
+	Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/listar/" -Method GET
+resposta esperada: 
+aparecerá todos os filmes
 
-2. Crie e ative um ambiente virtual:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # No Windows use: venv\Scripts\activate
-   ```
+3- Buscar um filme pelo ID detalhadamente (GET)
+	Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/detalhar/1/" -Method GET
+resposta esperada: 
+id titulo    ano  genero
+-- ------    ---  ------
+ 2 FILME , DATA , GENERO
+ 
+4- Atualizar um filme (PUT)
+	Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/atualizar/1/" -Method PUT -ContentType "application/json" -Body '{"titulo": "John Wick 2", "ano": 2017, "genero": "Action"}'
+resposta esperada (por exemplo):
+mensagem                      filme
+--------                      -----
+Filme atualizado com sucesso! @{id=2; titulo=John Wick 2; ano=2017; genero=Action}
 
-3. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
+5- curl -X DELETE 
+	Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/deletar/1/" -Method DELETE
+resposta esperada:
+mensagem
+--------
+Filme deletado com sucesso!
+==============================================================================================================
+atenção: o TERMINAL DO POWERSHELL NAO INTERPRETA CURL DA MESMA FORMA QUE OUTROS TERMINAIS, UTILIZE COMANDOS COMO Invoke-RestMethod
+por exemplo "Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/criar/" -Method Post -ContentType "application/json" -Body '{"titulo": "Inception", "ano": 2010, "genero": "Sci-Fi"}'"
 
-4. Configure o banco de dados e aplique as migrações:
-   ```bash
-   python manage.py migrate
-   ```
 
-5. Inicie o servidor:
-   ```bash
-   python manage.py runserver
-   ```
-
-## Uso com Docker
-
-Para rodar o projeto com Docker:
-```bash
-docker-compose up --build
-```
-
-## Endpoints da API
-
-- `GET /api/` - Lista os recursos
-- `POST /api/` - Cria um novo recurso
-- `GET /api/{id}/` - Detalhes de um recurso
-- `PUT /api/{id}/` - Atualiza um recurso
-- `DELETE /api/{id}/` - Exclui um recurso
-
-## Contribuição
-
-1. Crie um branch:
-   ```bash
-   git checkout -b minha-feature
-   ```
-2. Faça suas alterações e commite:
-   ```bash
-   git commit -m "feat: minha nova feature"
-   ```
-3. Envie para o repositório remoto:
-   ```bash
-   git push origin minha-feature
-   ```
-4. Abra um Pull Request!
+do jeito que ta deu certo: Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/criar/" -Method POST -ContentType "application/json" -Body '{"titulo": "Inception", "ano": 2010, "genero": "Sci-Fi"}'
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/filme/criar/" -Method POST -ContentType "application/json" -Body '{"titulo": "John Wick", "ano": 2014, "genero": "Action"}'
 
 

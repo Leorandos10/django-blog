@@ -14,18 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
-from meu_app.views import criar_filme, listar_filmes, atualizar_filme, deletar_filme
-
-
-urlpatterns = [
-    path("filme/", criar_filme, name="criar_filme"),
-    path("filmes/", listar_filmes, name="listar_filmes"),
-    path("filme/<str:imdb_id>/", atualizar_filme, name="atualizar_filme"),
-    path("filme/<str:imdb_id>/delete/", deletar_filme, name="deletar_filme"),
-]
+from django.contrib import admin
+from django.urls import path, include
+from django.http import JsonResponse
 
 def home(request):
-    return HttpResponse(
-        "Página inicial funcionando! \nPesquise por: http://127.0.0.1:8000/api/filme/?titulo=Dune"
-    )
+    return JsonResponse({"mensagem": "Pagina inicial funcionando. Utilize por exemplo: http://127.0.0.1:8000/api/filme/?titulo=NOMEDOFILME para buscar filmes."})
+
+urlpatterns = [
+    path("api/", include("meu_app.urls")),  # Certifique-se de que "meu_app" está correto
+    path('', home, name='home'),  # Página inicial
+]
